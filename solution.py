@@ -57,6 +57,8 @@ if __name__ == "__main__":
 
     zipped = list(zip(rs, angles))
 
+    _ = input()
+
     screen = turtle.Screen()
     screen.tracer(0)
     turtle.speed(0)
@@ -85,4 +87,4 @@ if __name__ == "__main__":
 
         screen.update()
 
-    i = input()
+    _ = input()
