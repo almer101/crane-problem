@@ -2,20 +2,7 @@ import turtle
 import random
 import numpy as np
 from math import sin, cos, radians, degrees, pi, atan, sqrt
-
-def phi(p):
-    phi = atan(p[1] / p[0])
-    if phi < 0 and p[1] > 0:
-        return phi + pi
-    elif phi < 0 and p[1] < 0:
-        return phi + 2 * pi
-    elif phi > 0 and p[0] < 0 and p[1] < 0:
-        return phi + pi
-    return phi
-
-def rotate(p, angle): # angle in radians
-    m = np.array([[cos(angle), sin(angle)],[-sin(angle), cos(angle)]])
-    return np.matmul(p,m)
+from util import *
 
 def draw_point(p, size=8, color='blue'):
     turtle.pu()
@@ -44,16 +31,15 @@ if __name__ == "__main__":
     omega = 1.0 #rad/s
 
     start = np.array([random.random() * radius, 0.0])
-    # start = rotate(start, 2 * pi * random.random())
+    start = rotate(start, 2 * pi * random.random())
     r0 = sqrt(start[0]**2 + start[1]**2)
 
     end = np.array([random.random() * radius, 0.0])
-    end_angle = 2 * pi * random.random()
-    end = rotate(end, end_angle)
+    end = rotate(end, 2 * pi * random.random())
 
     start_angle = phi(start)
     end_angle = phi(end)
-    # alfa = 2.15
+
     start_rot = rotate(start, -start_angle)
     end_rot = rotate(end, -start_angle)
     a = (end_rot[1] - start_rot[1]) / (end_rot[0] - start_rot[0])
@@ -61,14 +47,13 @@ if __name__ == "__main__":
     draw_background(radius, start, end)
 
     # calculate d_angle
-    d_angle = abs(phi(start) - phi(end))
+    d_angle = abs(start_angle - end_angle)
     d_angle = min(d_angle, 2 * pi - d_angle)
     t_s = np.linspace(0.0, d_angle / omega, num = 300)
 
-    if end_angle > pi:
+    if (end_angle > start_angle and  end_angle - start_angle > pi) or (start_angle > end_angle and start_angle - end_angle < pi):
         angles = map(lambda t: -omega * t, t_s)
         rs = map(lambda phi: (a * r0) / (a * cos(phi) - sin(phi)), angles)
-
     else:
         angles = map(lambda t: omega * t, t_s)
         rs = map(lambda phi: (a * r0) / (a * cos(phi) - sin(phi)), angles)
@@ -76,8 +61,6 @@ if __name__ == "__main__":
 
     angles = map(lambda p: p + start_angle, angles)
     zipped = list(zip(rs, angles))
-
-    # _ = input()
 
     screen = turtle.Screen()
     screen.tracer(0)
