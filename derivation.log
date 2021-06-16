@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.10.29)  9 JUN 2021 13:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.10.29)  16 JUN 2021 16:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -128,6 +128,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 33--34
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--40
+
+ []
+
 [2 <./crane.jpg>] [3] (./derivation.aux) ) 
 Here is how much of TeX's memory you used:
  1235 strings out of 480608
@@ -145,7 +150,7 @@ s/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2020/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmr8.pfb>
-Output written on derivation.pdf (3 pages, 2804583 bytes).
+Output written on derivation.pdf (3 pages, 2805155 bytes).
 PDF statistics:
  44 PDF objects out of 1000 (max. 8388607)
  29 compressed objects within 1 object stream
