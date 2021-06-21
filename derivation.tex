@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{amsmath}
 
 \begin{document}
 
@@ -39,6 +40,23 @@ At the time $t=0$ the load is located at the starting point and the crane immedi
 
 We will restrict ourselves to the case when the starting point $S$ is on the positive side of $x$-axis ($\varphi = 0$), like on the figure \ref{fig:crane}, because if that is not the case, it is possible to rotate the whole system so the point $S$ ends up at positive side $x$-axis. Moreover, when the system is rotated and the point $S$ is on $\varphi = 0$, if the ending point $E$ has the angle $\varphi > \pi$ we can just change the crane's rotation direction: $\varphi(t) = -\omega t$. If the ending point has $\varphi < \pi$ then the rotation direction stays positive: $\varphi(t) = \omega t$.\\
 
+The other thing to keep in mind is the special case when the starting and ending point are $\pi$ radians apart (i.e. both lay on the line through the center and are on the opposite sides of the center). In that case the $r(t)$ looks like this:
+
+\[ r(t) = \begin{cases}
+      r_{start} & \text{if} \ t = 0 \\
+      0 & \text{if} \ t = 0^{+} \\
+      0 & \text{if} \ t \in \langle 0,T \rangle \\
+      r_{end} & \text{if} \ t = T^{-} \\
+      r_{end} & \text{if} \ t \geq T
+   \end{cases}
+\]
+
+Where $r_{start}$ is the starting radius $r_{start} = \sqrt{s_1^2 + s_2^2}$, and $r_{end} = \sqrt{e_1^2 + e_2^2}$. Time of the crane rotation $T$ is the time needed for the crane, rotating at the constant angular velocity $\omega$, to cover the angle between the starting and ending point. With the fact that we always let the starting point to be at angle $\varphi = 0$:
+
+\[
+    T = \frac{\min{(|\varphi_{end} - \varphi_{start}|, 2\pi - |\varphi_{end} - \varphi_{start}|)}}{\omega} \Rightarrow T = \frac{\min{(\varphi_{end}, 2\pi - \varphi_{end})}}{\omega}
+\]
+
 Having said this, the further derivation of the formula will only focus on the positive rotation, because the problem can always be mirrored around the $x$-axis such that the rotation is positive.\\
 
 We can decompose the velocity of the load into 2 independent velocities: the velocity of the load caused by the rotation of the arm of the crane and the velocity of the load along the arm of the crane. First let's formally write down the velocity caused by the rotation of the arm.\\
@@ -59,10 +77,10 @@ Which means we have the following: \( \omega = \frac{2\pi}{\Delta t} = const \),
 We deduct the formula for the amount of velocity at the distance from the center of the crane $r$:
 \[ v_r = r\omega \]
 
-Since this is only the length of the vector, we need to take care of the direction as well. Looking at the figure \ref{fig:rot_velocity} it is visible that the horizontal component of the velocity is equal to $-v_rsin(\varphi)$ and the vertical component is equal to $v_rcos(\varphi)$. Ultimately the vector of the velocity caused by the rotation of the arm is:
+Since this is only the length of the vector, we need to take care of the direction as well. Looking at the figure \ref{fig:rot_velocity} it is visible that the horizontal component of the velocity is equal to $-v_r\sin(\varphi)$ and the vertical component is equal to $v_r\cos(\varphi)$. Ultimately the vector of the velocity caused by the rotation of the arm is:
 
-% \[ \vec{v_r}(\varphi) = (-v_r sin(\varphi), v_r cos(\varphi)) \]
-\[ \vec{v_r}(t) = (-r(t)\omega sin(\varphi(t)), r\omega cos(\varphi(t))) \]
+% \[ \vec{v_r}(\varphi) = (-v_r \sin(\varphi), v_r \cos(\varphi)) \]
+\[ \vec{v_r}(t) = (-r(t)\omega \sin(\varphi(t)), r\omega \cos(\varphi(t))) \]
 
 \subsection{Load velocity along the arm of the crane}
 
@@ -81,14 +99,14 @@ The $c(t)$ only denotes the length of the vector of velocity along the arm of th
 
 \noindent From the figure above it is visible that the velocity along the arm $\vec{v_a}(t)$ is as follows:
 
-\[ \vec{v_a}(t) = (c(t) cos(\varphi(t)), c(t) sin(\varphi(t))) \]
+\[ \vec{v_a}(t) = (c(t) \cos(\varphi(t)), c(t) \sin(\varphi(t))) \]
 
 \subsection{Combining the two}
 
 Now that we have both velocities defined and explicitly written, we can start finding the expression for $c(t)$. The resulting velocity will be:
 
 \[ \vec{v_{tot}}(t) = (v_{totx}, v_{toty}) \]
-\[ \vec{v_{tot}}(t) = \vec{v_a}(t) + \vec{v_r}(t) = (c(t) cos(\varphi(t)) - r(t)\omega sin(\varphi(t)), c(t) sin(\varphi(t)) + r(t)\omega cos(\varphi(t))) \]
+\[ \vec{v_{tot}}(t) = \vec{v_a}(t) + \vec{v_r}(t) = (c(t) \cos(\varphi(t)) - r(t)\omega \sin(\varphi(t)), c(t) \sin(\varphi(t)) + r(t)\omega \cos(\varphi(t))) \]
 
 
 The way to ensure that the load will have the linear path from point $S$ to point $E$ is that the total velocity vector always has the direction same as the vector connecting the two points. Let's denote that direction with $a$:
@@ -97,36 +115,36 @@ The way to ensure that the load will have the linear path from point $S$ to poin
 
 \noindent and equalize that with the direction of the total velocity of the load:
 
-\[ a = \frac{c(t)sin(\varphi(t)) + r(t)\omega cos(\varphi(t))}{c(t)cos(\varphi(t)) - r(t)\omega sin(\varphi(t))} \]
+\[ a = \frac{c(t)\sin(\varphi(t)) + r(t)\omega \cos(\varphi(t))}{c(t)\cos(\varphi(t)) - r(t)\omega \sin(\varphi(t))} \]
 
-\[ a [c(t)cos(\varphi(t)) - r(t)\omega sin(\varphi(t))] = c(t)sin(\varphi(t)) + r(t)\omega cos(\varphi(t)) \]
+\[ a [c(t)\cos(\varphi(t)) - r(t)\omega \sin(\varphi(t))] = c(t)\sin(\varphi(t)) + r(t)\omega \cos(\varphi(t)) \]
 
 \noindent we use the fact that the $c(t) = \frac{dr}{dt}$
 
-\[ a\frac{dr}{dt}cos(\varphi(t)) - r(t)a\omega sin(\varphi(t)) = \frac{dr}{dt}sin(\varphi(t)) + r\omega cos(\varphi(t))\]
+\[ a\frac{dr}{dt}\cos(\varphi(t)) - r(t)a\omega \sin(\varphi(t)) = \frac{dr}{dt}\sin(\varphi(t)) + r\omega \cos(\varphi(t))\]
 
-\[ \frac{dr}{dt}[a\cdot cos(\varphi(t)) - sin(\varphi(t))] = r\omega[cos(\varphi(t))+a\cdot sin(\varphi(t))] \]
+\[ \frac{dr}{dt}[a\cdot \cos(\varphi(t)) - \sin(\varphi(t))] = r\omega[\cos(\varphi(t))+a\cdot \sin(\varphi(t))] \]
 
-\[ \frac{dr}{r} = \frac{a\cdot sin(\varphi(t))+cos(\varphi(t))}{a\cdot cos(\varphi(t))-sin(\varphi(t))}\omega dt \]
+\[ \frac{dr}{r} = \frac{a\cdot \sin(\varphi(t))+\cos(\varphi(t))}{a\cdot \cos(\varphi(t))-\sin(\varphi(t))}\omega dt \]
 
 At this point, we will assume the positive rotation of the crane. This means that that $\varphi(t) = \omega t$ and that $d\varphi = \omega dt$. With that in mind, we continue with the derivation of the formula.
 
-\[ \frac{dr}{r} = \frac{a\cdot sin(\varphi)+cos(\varphi)}{a\cdot cos(\varphi)-sin(\varphi)}d\varphi \]
+\[ \frac{dr}{r} = \frac{a\cdot \sin(\varphi)+\cos(\varphi)}{a\cdot \cos(\varphi)-\sin(\varphi)}d\varphi \]
 
 % \int x^2 \,dx
 
-\[ \int \frac{1}{r} \,dr = \int \frac{a\cdot sin(\varphi)+cos(\varphi)}{a\cdot cos(\varphi)-sin(\varphi)} \,d\varphi = \Bigg| \begin{array}{ll}
-                  u = a\cdot cos(\varphi) - sin(\varphi)\\
-                  du = -(a\cdot cos(\varphi) - sin(\varphi)d\varphi)
+\[ \int \frac{1}{r} \,dr = \int \frac{a\cdot \sin(\varphi)+\cos(\varphi)}{a\cdot \cos(\varphi)-\sin(\varphi)} \,d\varphi = \Bigg| \begin{array}{ll}
+                  u = a\cdot \cos(\varphi) - \sin(\varphi)\\
+                  du = -(a\cdot \cos(\varphi) - \sin(\varphi)d\varphi)
                 \end{array}
                 \Bigg|= - \int \frac{1}{u} \,du
 \]
 
-\[ \log{r} = -\log{u} + C_1 \ \ \ \Rightarrow \ \ \ \log{r} = -\log{(a\cdot cos(\varphi) - sin(\varphi))} + C_1\]
-% \[ \log{r} = -\log{(a\cdot cos(\varphi) - sin(\varphi))} + C_1 \]
+\[ \log{r} = -\log{u} + C_1 \ \ \ \Rightarrow \ \ \ \log{r} = -\log{(a\cdot \cos(\varphi) - \sin(\varphi))} + C_1\]
+% \[ \log{r} = -\log{(a\cdot \cos(\varphi) - \sin(\varphi))} + C_1 \]
 
-\[ r = \frac{C}{a\cdot cos(\varphi - sin(\varphi)(t)}\]
-\[ r(t) = \frac{C}{a\cdot cos(\omega t) - sin(\omega t)}\]
+\[ r = \frac{C}{a\cdot \cos(\varphi - \sin(\varphi)(t)}\]
+\[ r(t) = \frac{C}{a\cdot \cos(\omega t) - \sin(\omega t)}\]
 
 To get rid of the constant and get the exact value, we need to take into account the starting condition. At the time $t=0$ the radius of the load was equal to the distance of the point $S$ from the center.
 
@@ -135,13 +153,13 @@ To get rid of the constant and get the exact value, we need to take into account
 
 Now we have the expression for the radius of the load dependent on the time $t$:
 
-\[ r(t) = \frac{a\cdot r_0}{a\cdot cos(\omega t) - sin(\omega t)}\]
+\[ r(t) = \frac{a\cdot r_0}{a\cdot \cos(\omega t) - \sin(\omega t)}\]
 
 To get the expression for the velocity $c(t)$ we can simply take the derivative of the radius:
 
-\[ c(t) = \frac{dr}{dt} = -a\cdot r_0 \frac{-a\cdot sin(\omega t) - cos(\omega t)}{[a\cdot cos(\omega t) - sin(\omega t)]^2}\]
+\[ c(t) = \frac{dr}{dt} = -a\cdot r_0 \frac{-a\cdot \sin(\omega t) - \cos(\omega t)}{[a\cdot \cos(\omega t) - \sin(\omega t)]^2}\]
 
-\[ c(t) = a\cdot r_0 \frac{a\cdot sin(\omega t) + cos(\omega t)}{[a\cdot cos(\omega t) - sin(\omega t)]^2} \]
+\[ c(t) = a\cdot r_0 \frac{a\cdot \sin(\omega t) + \cos(\omega t)}{[a\cdot \cos(\omega t) - \sin(\omega t)]^2} \]
 
 That's it! :)
 
