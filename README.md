@@ -2,7 +2,7 @@
 
 This is the problem my friend and myself came up with and saw in it the potential for some mental gymnastics.
 
-The problem formulation and the solution can be found [here](formula\ derivation/derivation.pdf).
+The problem formulation and the solution can be found [here](derivation/derivation.pdf).
 
 ## Implementation
 
