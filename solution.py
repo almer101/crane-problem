@@ -49,7 +49,7 @@ if __name__ == "__main__":
     # calculate d_angle
     d_angle = abs(start_angle - end_angle)
     d_angle = min(d_angle, 2 * pi - d_angle)
-    t_s = np.linspace(0.0, d_angle / omega, num = 300)
+    t_s = np.linspace(0.0, d_angle / omega, num = 600)
 
     if (end_angle > start_angle and  end_angle - start_angle > pi) or (start_angle > end_angle and start_angle - end_angle < pi):
         angles = map(lambda t: -omega * t, t_s)
